@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name          SE Chat Easy Input tools
 // @author        Robert Lemon
-// @version       0.1.5
+// @version       0.1.50
 // @namespace     http://rlemon.com
 // @description   Adds keyboard shortcuts to the SE Chats
 // @include       http://chat.stackexchange.com/rooms/*

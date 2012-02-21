@@ -88,10 +88,86 @@ EmbedFunctionOnPageAndExecute(function() {
 		}
 	};
 
+
+	/* ALT + B handler 
+	 * If focus is in the textarea AND NO selection range is set, insert the '****' at the caret position
+	 * and move the caret to the middle of the text.
+	 * If focus is in the textarea AND there is a selection range is set, wrap the range in '**' + '**',
+	 * keep the original range selected.
+	 * If focus is not in the textarea do nothing.
+	 * */
+	var input_bold = function() {
+		if ( in_input() ) {
+			var selection = get_selection(), pre = get_pre(), post = get_post(), pos_start = 0, pos_end = 0, tag_wrapper = '**';
+			if( selection ) {
+				pos_start = pre.length + tag_wrapper.length;
+				pos_end = pos_start + selection.length;
+				pre += tag_wrapper + selection + tag_wrapper;
+			} else {
+				pre += tag_wrapper;
+				pos_start = pos_end = pre.length;
+				post = tag_wrapper + post;
+			}
+			chat_input.value = pre + post;
+			chat_input.setSelectionRange(pos_start, pos_end);
+		}
+	};
+
+	/* ALT + I handler 
+	 * If focus is in the textarea AND NO selection range is set, insert the '**' at the caret position
+	 * and move the caret to the middle of the text.
+	 * If focus is in the textarea AND there is a selection range is set, wrap the range in '*' + '*',
+	 * keep the original range selected.
+	 * If focus is not in the textarea do nothing.
+	 * */
+	var input_italics = function() {
+		if ( in_input() ) {
+			var selection = get_selection(), pre = get_pre(), post = get_post(), pos_start = 0, pos_end = 0, tag_wrapper = '*';
+			if( selection ) {
+				pos_start = pre.length + tag_wrapper.length;
+				pos_end = pos_start + selection.length;
+				pre += tag_wrapper + selection + tag_wrapper;
+			} else {
+				pre += tag_wrapper;
+				pos_start = pos_end = pre.length;
+				post = tag_wrapper + post;
+			}
+			chat_input.value = pre + post;
+			chat_input.setSelectionRange(pos_start, pos_end);
+		}
+	};
+
+	/* ALT + S handler 
+	 * If focus is in the textarea AND NO selection range is set, insert the '------' at the caret position
+	 * and move the caret to the middle of the text.
+	 * If focus is in the textarea AND there is a selection range is set, wrap the range in '---' + '---',
+	 * keep the original range selected.
+	 * If focus is not in the textarea do nothing.
+	 * */
+	var input_strikethrough = function() {
+		if ( in_input() ) {
+			var selection = get_selection(), pre = get_pre(), post = get_post(), pos_start = 0, pos_end = 0, tag_wrapper = '---';
+			if( selection ) {
+				pos_start = pre.length + tag_wrapper.length;
+				pos_end = pos_start + selection.length;
+				pre += tag_wrapper + selection + tag_wrapper;
+			} else {
+				pre += tag_wrapper;
+				pos_start = pos_end = pre.length;
+				post = tag_wrapper + post;
+			}
+			chat_input.value = pre + post;
+			chat_input.setSelectionRange(pos_start, pos_end);
+		}
+	};
+
 	/* Run the page after the shortcut script finishes loading */
 	var run = function() {
 		shortcut.add('Alt+T', input_tag);
 		shortcut.add('Alt+A', input_link);
+		shortcut.add('Alt+B', input_bold);
+		shortcut.add('Alt+I', input_italics);
+		shortcut.add('Alt+S', input_strikethrough);
 	};
 
 	/* First load the shortcut script */

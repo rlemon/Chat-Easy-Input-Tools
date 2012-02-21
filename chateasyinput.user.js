@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name          SE Chat Easy Input tools
 // @author        Robert Lemon
-// @version       0.1.41
+// @version       0.1.5
 // @namespace     http://rlemon.com
 // @description   Adds keyboard shortcuts to the SE Chats
 // @include       http://chat.stackexchange.com/rooms/*
@@ -74,6 +74,10 @@ EmbedFunctionOnPageAndExecute(function() {
 	var input_strikethrough = function() {
 		insert_wrappers('---','---','strike-though text')
 	};
+	
+	var input_code = function() { // UX needs to be considered.. single line vs multi-line input. format code / fixed font.
+		insert_wrappers('`','`','formatted code');
+	};
 
 	/* Run the page after the shortcut script finishes loading */
 	var run = function() {
@@ -82,6 +86,7 @@ EmbedFunctionOnPageAndExecute(function() {
 		shortcut.add('Alt+B', input_bold);
 		shortcut.add('Alt+I', input_italics);
 		shortcut.add('Alt+S', input_strikethrough);
+		shortcut.add('Alt+C', input_code);
 	};
 
 	/* First load the shortcut script */

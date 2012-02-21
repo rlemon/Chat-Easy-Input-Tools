@@ -21,3 +21,7 @@ These tools have been designed to *mostly* mimic the main site(s) input. Some va
 `alt` + `s`
 
 * strikethough text
+
+`alt` + `c`
+
+* formatted code

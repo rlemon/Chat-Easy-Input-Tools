@@ -3,12 +3,16 @@
 These tools have been designed to *mostly* mimic the main site(s) input. Some variations exist and may possibly be changed to completly shadow the site. 
 
 `alt` + `a`
-- insert link
+* insert link
+
 `alt` + `t`
-- insert tag
+* insert tag
+
 `alt` + `b`
-- bold text
+* bold text
+
 `alt` + `i`
-- italics text
+* italics text
+
 `alt` + `s`
-- strikethough text
+* strikethough text

@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name          SE Chat Easy Input tools
 // @author        Robert Lemon
-// @version		  0.1.4
+// @version		  0.1.41
 // @namespace     http://rlemon.com
 // @description   Adds keyboard shortcuts to the SE Chats
 // @include       http://chat.stackexchange.com/rooms/*
@@ -51,22 +51,11 @@ EmbedFunctionOnPageAndExecute(function() {
 		}
 	}
 	
-	/* still to be converted.. if possible */
 	var input_link = function() {
-		if ( in_input() ) {
-			var selection = get_selection(), pre = get_pre(), post = get_post(), pos_start = 0, pos_end = 0;
+		if ( in_input() ) { // doubled i know. but we don't want to prompt otherwise. 
 			var url = prompt('Enter a URL\nhttp://example.com/ "optional title"','http://');
 			if( url === null ) return; // user hit cancel
-			if( selection ) {
-				pre += '[' + selection + '](' + url + ')';
-				pos_start = pos_end = pre.length;
-			} else {
-				pos_start = pre.length + 1;
-				pos_end = pos_start + 27; // probably a cheap way to do this.... 
-				pre += '[enter link description here](' + url + ')';
-			}
-			chat_input.value = pre + post;
-			chat_input.setSelectionRange(pos_start, pos_end);
+			insert_wrappers('[', '](' + url + ')', 'enter link description here');
 		}
 	};
 	

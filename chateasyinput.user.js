@@ -39,37 +39,18 @@ EmbedFunctionOnPageAndExecute(function() {
 		return document.activeElement === chat_input;
 	}
 	
-	
-
-	/* ALT + T handler 
-	 * If focus is in the textarea AND NO selection range is set, insert the '[tag:]' at the caret position
-	 * and move the caret just past the colon.
-	 * If focus is in the textarea AND there is a selection range is set, wrap the range in '[tag:' + ']',
-	 * and move the caret just past range end. deselect the range.
-	 * If focus is not in the textarea do nothing.
-	 * */
-	var input_tag = function() {
-		if ( in_input() ) {
-			var selection = get_selection(), pre = get_pre(), post = get_post(), pos = 0, tag_open = '[tag:', tag_close = ']';
-			if( selection ) {
-				pre += tag_open + selection + tag_close;	
-			} else {
-				pre += tag_open;
-				post = tag_close + post;
-			}
+	var insert_wrappers = function(wrapper_open, wrapper_close, default_message) {
+		if( in_input() ) {
+			var selection = get_selection() || default_message, pre = get_pre(), post = get_post(), pos_start = 0, pos_end = 0;
+			pos_start = pre.length + wrapper_open.length;
+			pos_end = pos_start + selection.length;
+			pre += wrapper_open + selection + wrapper_close;
 			chat_input.value = pre + post;
-			pos = pre.length;
-			chat_input.setSelectionRange(pos, pos);
+			chat_input.setSelectionRange(pos_start, pos_end);
 		}
-	};
+	}
 	
-	/* ALT + A handler 
-	 * If focus is in the textarea AND NO selection range is set, prompt for url. Insert the link at the caret position with the url and default text.
-	 * select default text.
-	 * If focus is in the textarea AND there is a selection range is set, prompt the user for a url to correspond to the link. replace the selection with the link
-	 * and move the caret just past range end. deselect the range.
-	 * If focus is not in the textarea do nothing.
-	 * */
+	/* still to be converted.. if possible */
 	var input_link = function() {
 		if ( in_input() ) {
 			var selection = get_selection(), pre = get_pre(), post = get_post(), pos_start = 0, pos_end = 0;
@@ -87,78 +68,21 @@ EmbedFunctionOnPageAndExecute(function() {
 			chat_input.setSelectionRange(pos_start, pos_end);
 		}
 	};
+	
+	var input_tag = function() {
+		insert_wrappers('[tag:',']','tag-text');
+	};
 
-
-	/* ALT + B handler 
-	 * If focus is in the textarea AND NO selection range is set, insert the '****' at the caret position
-	 * and move the caret to the middle of the text.
-	 * If focus is in the textarea AND there is a selection range is set, wrap the range in '**' + '**',
-	 * keep the original range selected.
-	 * If focus is not in the textarea do nothing.
-	 * */
 	var input_bold = function() {
-		if ( in_input() ) {
-			var selection = get_selection(), pre = get_pre(), post = get_post(), pos_start = 0, pos_end = 0, tag_wrapper = '**';
-			if( selection ) {
-				pos_start = pre.length + tag_wrapper.length;
-				pos_end = pos_start + selection.length;
-				pre += tag_wrapper + selection + tag_wrapper;
-			} else {
-				pre += tag_wrapper;
-				pos_start = pos_end = pre.length;
-				post = tag_wrapper + post;
-			}
-			chat_input.value = pre + post;
-			chat_input.setSelectionRange(pos_start, pos_end);
-		}
+		insert_wrappers('**','**','strong text');
 	};
 
-	/* ALT + I handler 
-	 * If focus is in the textarea AND NO selection range is set, insert the '**' at the caret position
-	 * and move the caret to the middle of the text.
-	 * If focus is in the textarea AND there is a selection range is set, wrap the range in '*' + '*',
-	 * keep the original range selected.
-	 * If focus is not in the textarea do nothing.
-	 * */
 	var input_italics = function() {
-		if ( in_input() ) {
-			var selection = get_selection(), pre = get_pre(), post = get_post(), pos_start = 0, pos_end = 0, tag_wrapper = '*';
-			if( selection ) {
-				pos_start = pre.length + tag_wrapper.length;
-				pos_end = pos_start + selection.length;
-				pre += tag_wrapper + selection + tag_wrapper;
-			} else {
-				pre += tag_wrapper;
-				pos_start = pos_end = pre.length;
-				post = tag_wrapper + post;
-			}
-			chat_input.value = pre + post;
-			chat_input.setSelectionRange(pos_start, pos_end);
-		}
+		insert_wrappers('_','_','italicized text');
 	};
 
-	/* ALT + S handler 
-	 * If focus is in the textarea AND NO selection range is set, insert the '------' at the caret position
-	 * and move the caret to the middle of the text.
-	 * If focus is in the textarea AND there is a selection range is set, wrap the range in '---' + '---',
-	 * keep the original range selected.
-	 * If focus is not in the textarea do nothing.
-	 * */
 	var input_strikethrough = function() {
-		if ( in_input() ) {
-			var selection = get_selection(), pre = get_pre(), post = get_post(), pos_start = 0, pos_end = 0, tag_wrapper = '---';
-			if( selection ) {
-				pos_start = pre.length + tag_wrapper.length;
-				pos_end = pos_start + selection.length;
-				pre += tag_wrapper + selection + tag_wrapper;
-			} else {
-				pre += tag_wrapper;
-				pos_start = pos_end = pre.length;
-				post = tag_wrapper + post;
-			}
-			chat_input.value = pre + post;
-			chat_input.setSelectionRange(pos_start, pos_end);
-		}
+		insert_wrappers('---','---','strike-though text')
 	};
 
 	/* Run the page after the shortcut script finishes loading */

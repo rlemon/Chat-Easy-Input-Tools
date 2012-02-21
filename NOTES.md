@@ -1,3 +1,7 @@
+######Monday, February 20th. 2012 (later on).
+
+done and done... 
+
 ######Monday, February 20th. 2012.
 
 It is obvious to me that all of the 'wrapper' text formatting can be done from a single function with the wrapper passed in. If done well I *should* be able to do the link with that as well. 

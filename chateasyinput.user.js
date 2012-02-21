@@ -49,16 +49,13 @@ EmbedFunctionOnPageAndExecute(function() {
 	 * If focus is not in the textarea do nothing.
 	 * */
 	var input_tag = function() {
-		var pos = 0,
-			TAG_OPEN = '[tag:',
-			TAG_CLOSE = ']';
 		if ( in_input() ) {
-			var selection = get_selection(), pre = get_pre(), post = get_post();
+			var selection = get_selection(), pre = get_pre(), post = get_post(), pos = 0, tag_open = '[tag:', tag_close = ']';
 			if( selection ) {
-				pre += TAG_OPEN + selection + TAG_CLOSE;	
+				pre += tag_open + selection + tag_close;	
 			} else {
-				pre += TAG_OPEN;
-				post = TAG_CLOSE + post;
+				pre += tag_open;
+				post = tag_close + post;
 			}
 			chat_input.value = pre + post;
 			pos = pre.length;

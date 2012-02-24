@@ -68,7 +68,7 @@ EmbedFunctionOnPageAndExecute(function() {
 	};
 
 	var input_italics = function() {
-		insert_wrappers('_','_','italicized text');
+		insert_wrappers('*','*','italicized text');
 	};
 
 	var input_strikethrough = function() {

@@ -26,4 +26,4 @@ In tags spaces are not converted into dashes (they probably should be).
 
 
 ###License
-This software is released under the GNU GPL version 3. For a full version of the license see [here](https://github.com/rlemon/Chat-Easy-Input-Tools/blob/master/LICENSE.md).
+This software is released under the WTFPL. A full version can be viewed [here](https://github.com/rlemon/Chat-Easy-Input-Tools/blob/master/LICENSE.md).

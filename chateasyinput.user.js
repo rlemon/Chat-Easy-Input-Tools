@@ -72,13 +72,15 @@ EmbedFunctionOnPageAndExecute(function() {
 	};
 
 	var input_strikethrough = function() {
-		insert_wrappers('---','---','strike-though text')
+		insert_wrappers('---','---','strike-though text');
 	};
 	
 	var input_code = function() { // UX needs to be considered.. single line vs multi-line input. format code / fixed font.
 		insert_wrappers('`','`','formatted code');
 	};
-
+        var input_tag_update = function() {
+		insert_wrappers('[tag:',']','tl-dr-update');
+	};
 /* Minified Shortcut script - avoids loading external resources. */
 
 shortcut={all_shortcuts:{},add:function(e,g,a){var c={type:"keydown",propagate:!1,disable_in_input:!1,target:document,keycode:!1};if(a)for(var f in c)"undefined"==typeof a[f]&&(a[f]=c[f]);else a=c;c=a.target;"string"==typeof a.target&&(c=document.getElementById(a.target));e=e.toLowerCase();f=function(b){b=b||window.event;if(a.disable_in_input){var d;b.target?d=b.target:b.srcElement&&(d=b.srcElement);3==d.nodeType&&(d=d.parentNode);if("INPUT"==d.tagName||"TEXTAREA"==d.tagName)return}b.keyCode?code=
@@ -95,6 +97,6 @@ shortcut.add('Alt+B', input_bold);
 shortcut.add('Alt+I', input_italics);
 shortcut.add('Alt+S', input_strikethrough);
 shortcut.add('Alt+C', input_code);
-
+shortcut.add('Alt+U', input_tag_update);
 
 });

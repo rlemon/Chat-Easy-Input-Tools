@@ -12,6 +12,7 @@ _All of the following commands are run if the user has focus in the chat input a
   * <kbd>ALT</kbd> + <kbd>I</kbd> formats text to _italics_.  
   * <kbd>ALT</kbd> + <kbd>S</kbd> formats text to ~~strike-through~~.  
   * <kbd>ALT</kbd> + <kbd>C</kbd> formats text to `code`.  
+  * <kbd>ALT</kbd> + <kbd>E</kbd> formats text to *:emote:*
 
 
 ###Installation 
